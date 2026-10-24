@@ -15,11 +15,12 @@ from pipeline import run_pipeline, load_inbox, INBOX_PATH
 from interview_prep import get_interview_prep
 from follow_up_logic import DEFAULT_TODAY
 from gemini_classifier import classify_email, load_cache, save_cache, CACHE_FILE
+from cybercrime_report import generate_complaint_dossier
 
 
 app = FastAPI(
-    title="AI-Era Job Tracker & Scam Shield",
-    description="Automated job application tracker, scam quarantine, follow-up detector, and interview prep notes.",
+    title="TaalMail AI • GDG Garbathon 2026",
+    description="Automated job application tracker, scam quarantine, 1930 cybercrime dossier, and interview prep notes.",
     version="1.0.0"
 )
 
@@ -81,6 +82,23 @@ def get_prep_notes(
     """Returns interview prep notes for stretch goal."""
     notes = get_interview_prep(company, role)
     return JSONResponse(content=notes)
+
+
+@app.get("/api/scam/complaint")
+def get_scam_complaint(email_id: int = Query(..., description="ID of the scam email")):
+    """Generates an official Cybercrime 1930 / cybercrime.gov.in complaint dossier for a scam email."""
+    inbox = load_inbox()
+    email_data = next((e for e in inbox if e.get("id") == email_id), None)
+    if not email_data:
+        raise HTTPException(status_code=404, detail="Email not found")
+    cache = load_cache()
+    cached_info = cache.get(str(email_id), {})
+    scam_reasons = cached_info.get("scam_reasons", [])
+    company = cached_info.get("company", email_data.get("company", ""))
+    role = cached_info.get("role", email_data.get("role", ""))
+    enriched_email = {**email_data, "company": company, "role": role}
+    dossier = generate_complaint_dossier(enriched_email, scam_reasons=scam_reasons)
+    return JSONResponse(content=dossier)
 
 
 @app.get("/api/cache/stats")

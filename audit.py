@@ -60,6 +60,14 @@ for a in data['applications']:
             print(f'  {a["company"]} -> NO PREP NOTES (BUG)')
 
 print()
+print('=== CYBERCRIME 1930 DOSSIER VERIFICATION ===')
+for scam_email in data['scams']:
+    cc_resp = urllib.request.urlopen(f'http://127.0.0.1:8000/api/scam/complaint?email_id={scam_email["id"]}')
+    dossier = json.loads(cc_resp.read())
+    ev = dossier['evidence']
+    print(f'  [{scam_email["company"]}] -> UPI={ev.get("upi_id")} | Fee={ev.get("demanded_amount")} | Category={ev.get("category")[:35]}...')
+
+print()
 print('=== CACHE / OFFLINE DEMO (RULE 06) ===')
 import os
 cache_file = r'c:\Users\Kalpit\Desktop\Code\GDG Garbathon\gemini_cache.json'

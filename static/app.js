@@ -1,4 +1,4 @@
-/* ══ TrackShield AI • Frontend Controller ══ */
+/* ══ TaalMail AI • Frontend Controller (GDG Garbathon 2026) ══ */
 
 let state = { summary: {}, scams: [], columns: { applied:[], interview:[], offer:[], rejected:[] }, applications: [], raw_emails: [] };
 let currentDate = "2026-10-24";
@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btnViewInbox").addEventListener("click", openInboxModal);
   document.getElementById("btnSandboxTest").addEventListener("click", runSandbox);
   document.getElementById("btnCopyDraft").addEventListener("click", copyDraft);
+  const btnCc = document.getElementById("btnCopyComplaint");
+  if (btnCc) btnCc.addEventListener("click", copyComplaint);
   loadPipeline(currentDate);
 });
 
@@ -216,7 +218,13 @@ function renderScams(scams) {
       <div class="scam-row-meta">
         <span class="scam-conf">${Math.round((s.confidence||.98)*100)}% conf</span>
         <span class="scam-date">${s.date}</span>
-        <button class="btn-inspect" onclick="openEmailInspect(${s.id})">Inspect</button>
+        <div class="scam-actions-wrap">
+          <button class="btn-inspect btn-cc-report" onclick="openCybercrimeModal(${s.id})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            1930 Cyber Report
+          </button>
+          <button class="btn-inspect" onclick="openEmailInspect(${s.id})">Inspect</button>
+        </div>
       </div>
     </div>`;
   }).join("");
@@ -266,6 +274,109 @@ function copyDraft() {
   const b = document.getElementById("fuBody").value;
   navigator.clipboard.writeText(`Subject: ${s}\n\n${b}`).then(() => {
     const t = document.getElementById("copyToast");
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 2500);
+  });
+}
+
+/* ── Cybercrime 1930 Dossier Modal ── */
+window.openCybercrimeModal = async function(id) {
+  const emails = [...(state.raw_emails || []), ...(state.scams || OFFLINE.scams)];
+  const email = emails.find(e => e.id === id) || (state.scams || []).find(s => s.id === id);
+  if (!email) return;
+
+  const titleEl = document.getElementById("ccModalTitle");
+  const gridEl = document.getElementById("ccEvidenceGrid");
+  const textEl = document.getElementById("ccComplaintText");
+  const advEl = document.getElementById("ccAdvisoryBox");
+
+  titleEl.textContent = `1930 Cybercrime Dossier • ${email.company || "Fake Offer"}`;
+  gridEl.innerHTML = `<span style="color:var(--text-2);font-size:12px;">Extracting forensic evidence...</span>`;
+  textEl.value = "Generating official complaint letter...";
+  advEl.innerHTML = "";
+  openModal("modalCybercrime");
+
+  try {
+    let dossier;
+    try {
+      const r = await fetch(`/api/scam/complaint?email_id=${id}`);
+      if (r.ok) dossier = await r.json();
+    } catch {}
+
+    if (!dossier || !dossier.evidence) {
+      dossier = generateClientDossier(email);
+    }
+    renderCybercrimeDossier(dossier, email);
+  } catch (err) {
+    gridEl.innerHTML = `<span style="color:var(--red)">Failed to generate cybercrime dossier.</span>`;
+  }
+};
+
+function renderCybercrimeDossier(dossier, email) {
+  const ev = dossier.evidence || {};
+  const chips = [];
+
+  if (ev.category) chips.push(`<div class="cc-chip cc-chip-blue"><strong>Category:</strong> ${esc(ev.category)}</div>`);
+  if (ev.upi_id) chips.push(`<div class="cc-chip cc-chip-red"><strong>Suspect UPI:</strong> ${esc(ev.upi_id)}</div>`);
+  if (ev.demanded_amount) chips.push(`<div class="cc-chip cc-chip-amber"><strong>Demanded Fee:</strong> ${esc(ev.demanded_amount)}</div>`);
+  if (ev.docs_demanded && ev.docs_demanded.length) chips.push(`<div class="cc-chip cc-chip-red"><strong>Harvested Docs:</strong> ${esc(ev.docs_demanded.join(", "))}</div>`);
+  if (ev.telegram_handle) chips.push(`<div class="cc-chip cc-chip-purple"><strong>Telegram Divert:</strong> ${esc(ev.telegram_handle)}</div>`);
+  if (ev.sender_domain) chips.push(`<div class="cc-chip cc-chip-slate"><strong>Phishing Domain:</strong> ${esc(ev.sender_domain)}</div>`);
+  if (ev.act_sections) chips.push(`<div class="cc-chip cc-chip-teal"><strong>Legal Section:</strong> ${esc(ev.act_sections)}</div>`);
+
+  document.getElementById("ccEvidenceGrid").innerHTML = chips.join("");
+  document.getElementById("ccComplaintText").value = dossier.complaint_text || "";
+
+  const actions = dossier.recommended_actions || [
+    "Call 1930 immediately to flag the suspect beneficiary UPI handle with the National Cyber Financial Citizen Fraud Registry.",
+    "Never transfer money; legitimate corporate recruitment strictly prohibits candidate fees.",
+    "If you shared Aadhaar/PAN details, lock your biometrics via the UIDAI mAadhaar app immediately."
+  ];
+
+  document.getElementById("ccAdvisoryBox").innerHTML = `
+    <div class="cc-advisory-title">Recommended Citizen Protection Actions:</div>
+    <ul class="cc-advisory-list">
+      ${actions.map(a => `<li>${esc(a)}</li>`).join("")}
+    </ul>`;
+}
+
+function generateClientDossier(email) {
+  const fullText = `${email.from || ""} ${email.subject || ""} ${email.body || ""}`;
+  const upiMatch = fullText.match(/\\b([a-zA-Z0-9.\\-_]+@(?!gmail|yahoo|hotmail|outlook)[a-zA-Z0-9]+)\\b/i);
+  const amtMatch = fullText.match(/(?:Rs\\.?|INR|₹)\\s*([\\d,]+)/i);
+  const upi = upiMatch ? upiMatch[1] : null;
+  const amt = amtMatch ? `Rs ${amtMatch[1]}` : null;
+  const domain = (email.from || "").split("@")[1] || "unknown";
+
+  const docs = [];
+  if (/aadhaar/i.test(fullText)) docs.push("Aadhaar Card");
+  if (/pan/i.test(fullText)) docs.push("PAN Card");
+  if (/cheque/i.test(fullText)) docs.push("Cancelled Cheque");
+
+  return {
+    helpline: "1930",
+    portal_url: "https://cybercrime.gov.in",
+    evidence: {
+      category: upi || amt ? "Online Financial Fraud • Job Recruitment Advance Fee Scam" : "Identity Theft & Document Harvesting",
+      upi_id: upi,
+      demanded_amount: amt,
+      docs_demanded: docs,
+      sender_domain: domain,
+      act_sections: "Section 66D IT Act & Section 318 BNS / 420 IPC"
+    },
+    complaint_text: `OFFICIAL COMPLAINT DOSSIER FOR CYBERCRIME.GOV.IN / HELPLINE 1930\\nCategory: Online Job Fraud & Identity Extortion\\nDate: ${email.date || "2026-10-24"}\\n\\nSUSPECT DETAILS:\\n• Sender: ${email.from || "unknown"}\\n• Domain: ${domain}\\n• Impersonated Company: ${email.company || "Corporate Entity"}\\n• Target UPI: ${upi || "N/A"}\\n• Demanded Fee: ${amt || "N/A"}\\n• Harvested Docs: ${docs.join(", ") || "None"}\\n\\nINCIDENT SUMMARY:\\nI received an unsolicited communication from ${email.from} claiming to offer employment as ${email.role || "Candidate"}. The communication required upfront payments or unencrypted identity documents. Please register this case and take appropriate action under Section 66D IT Act.\\n\\nGenerated via TaalMail AI Automated Defense Suite.`,
+    recommended_actions: [
+      "Dial 1930 to report the suspect UPI handle to the National Cyber Financial Citizen Fraud Registry.",
+      "Never pay upfront fees; legitimate employers never demand candidate security deposits.",
+      "Lock your Aadhaar biometrics using the UIDAI mAadhaar app if sensitive documents were requested."
+    ]
+  };
+}
+
+function copyComplaint() {
+  const text = document.getElementById("ccComplaintText").value;
+  navigator.clipboard.writeText(text).then(() => {
+    const t = document.getElementById("copyComplaintToast");
     t.classList.add("show");
     setTimeout(() => t.classList.remove("show"), 2500);
   });

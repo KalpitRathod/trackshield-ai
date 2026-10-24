@@ -1,20 +1,28 @@
-# 🛡️ TrackShield AI • GDG Garbathon 2026
-### AI-Era Layoff Recovery Suite: Automated Kanban Tracker, Scam Quarantine, Follow-Up Alarms & Interview Prep Copilot
+# 🪘 TaalMail AI • GDG Garbathon 2026
+### AI-Era Layoff Recovery Suite: Automated Kanban Tracker, Scam Quarantine, 1930 Cybercrime Dossier & Interview Prep Copilot
 
+[![Unique Name](https://img.shields.io/badge/Unique%20Name-TaalMail%20AI%20(Garba%20Theme)-ff69b4)](#-1-garba-theme-unique-name-taalmail-ai)
+[![Unique Feature](https://img.shields.io/badge/Unique%20Feature-1930%20Cybercrime%20Dossier-red)](#f-national-cybercrime-portal--1930-complaint-generator-unique-feature)
 [![Repository Size](https://img.shields.io/badge/Repo%20Size-%3C%201%20MB%20(Rule%20Compliant)-brightgreen)](#important-rules-compliance)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-blue)](#prerequisites)
 [![AI Platform](https://img.shields.io/badge/Gemini%202.5%20Flash-Structured%20JSON-purple)](#architecture-and-approach)
-[![License](https://img.shields.io/badge/License-MIT-teal)](LICENSE)
 
 ---
 
-## 📌 1. Chosen Challenge Vertical
+## 🎭 1. Garba Theme Unique Name: "TaalMail AI"
+
+* **The Cultural Wordplay:** In Gujarati Garba culture, **Taal (તાલ)** represents the vibrant musical rhythm and synchronized beat of the dancers. Combined with **Mail** (the job seeker's chaotic email inbox), it forms **Taalmel (તાલમેલ)**: the Gujarati / Hindi word for **harmony, balance, and perfect coordination**.
+* **The Mission:** When an AI-era layoff strikes and panic ensues, **TaalMail AI** restores rhythm and harmony to the applicant's life by synchronizing their inbox, blocking predatory scammers, and guiding them into their next career chapter with confidence.
+
+---
+
+## 📌 2. Chosen Challenge Vertical
 
 * **Challenge Persona:** A recently laid-off job seeker in the AI era who has applied to 100+ roles across job boards and career pages.
 * **The Problem:** 
   1. **Application Chaos:** Applicants rapidly lose track of who responded, who rejected them, what stage each role is in, and when it is time to follow up.
   2. **Predatory Job Scams:** Vulnerable candidates are prime targets for fake job offers demanding "training fees" or "gate pass security deposits", harvesting unencrypted Aadhaar/PAN cards before any interview, or posing as enterprise companies from freemail/typosquatted domains.
-* **The Solution (TrackShield AI):** An intelligent, deterministic and generative pipeline that ingests raw job-seeker emails, isolates fake offers into a quarantined Scam Shield, merges multi-touch communications into an self-updating 4-column Kanban tracker, flags stale applications with automated follow-up drafts, and prepares tailored interview briefing notes for upcoming rounds.
+* **The Solution (TaalMail AI):** An intelligent, deterministic and generative pipeline that ingests raw job-seeker emails, isolates fake offers into a quarantined Scam Shield, merges multi-touch communications into an self-updating 4-column Kanban tracker, generates 1-click official 1930 cybercrime complaints, flags stale applications with automated follow-up drafts, and prepares tailored interview briefing notes for upcoming rounds.
 
 ---
 
@@ -84,12 +92,19 @@ Job seekers receive multiple emails per company (e.g., application confirmation 
 * Applications remaining in `applied` status for &ge; 7 days without reply trigger an overdue alarm.
 * Dynamically generates polite, ready-to-send follow-up email drafts with customized subject and body.
 
-### E. Interview Prep Copilot (`interview_prep.py` — Stretch Goal)
+### E. Interview Prep Copilot (`interview_prep.py` • Stretch Goal)
 For any application in the `interview` column, one click generates:
 * Company profile and business brief.
 * Core technical focus topics (e.g., System Design, Concurrency, React Performance).
 * Likely behavioral/technical questions with strategic answer tips.
 * Smart, impressive reverse-interview questions to ask the hiring team.
+
+### F. National Cybercrime Portal & 1930 Complaint Generator (`cybercrime_report.py` • Unique Innovation)
+When a fake offer is quarantined, applicants often do not know how or where to report the crime. TaalMail AI provides an automated forensic evidence and complaint generator:
+* **Forensic Extraction:** Parses suspect UPI handles (`info.batch@upi`, `tm-onboard@icici`), demanded extortion fees, lookalike phishing domains, and identity harvesting attempts (Aadhaar/PAN).
+* **Legal Section Mapping:** Maps the offense to relevant provisions of the **Information Technology Act Section 66D** (Cheating by Personation Using Computer Resource) and **Section 318 BNS / IPC 420**.
+* **One-Click Dossier:** Generates a pre-formatted, formal complaint letter ready to paste directly into **cybercrime.gov.in** or dictate over the **National Cyber Crime Helpline 1930**.
+* **Citizen Protection Advisory:** Provides instant containment steps (e.g., locking biometrics via UIDAI mAadhaar app, flagging UPI handles with NPCI).
 
 ---
 
