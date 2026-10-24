@@ -28,8 +28,8 @@
 ### Installation & Run
 ```bash
 # 1. Clone the public repository
-git clone <YOUR_PUBLIC_REPO_URL>
-cd "GDG Garbathon"
+git clone https://github.com/KalpitRathod/trackshield-ai.git
+cd trackshield-ai
 
 # 2. (Optional) Create virtual environment
 python -m venv venv
