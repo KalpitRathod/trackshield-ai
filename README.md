@@ -1,6 +1,8 @@
-# 🪘 TaalMail AI • GDG Garbathon 2026
-### AI-Era Layoff Recovery Suite: Automated Kanban Tracker, Scam Quarantine, 1930 Cybercrime Dossier & Interview Prep Copilot
+# 🪘 Automation: Job Hunt Autopilot • TaalMail AI
+### Autonomous Job Search Autopilot: Real-time Multi-Touch Kanban, Scam Shield Quarantine, 7-Day Follow-Up Alarms, 1930 Cybercrime Dossier & Interview Prep Briefings
 
+[![Challenge](https://img.shields.io/badge/Challenge-Automation%3A%20Job%20Hunt%20Autopilot-blue)](#-2-chosen-challenge-vertical--automation-job-hunt-autopilot)
+[![Automated Unit Tests](https://img.shields.io/badge/Tests-8%20Passed%20(100%25)-brightgreen)](#-7-validation--automated-tests)
 [![Unique Name](https://img.shields.io/badge/Unique%20Name-TaalMail%20AI%20(Garba%20Theme)-ff69b4)](#-1-garba-theme-unique-name-taalmail-ai)
 [![Unique Feature](https://img.shields.io/badge/Unique%20Feature-1930%20Cybercrime%20Dossier-red)](#f-national-cybercrime-portal--1930-complaint-generator-unique-feature)
 [![Repository Size](https://img.shields.io/badge/Repo%20Size-%3C%201%20MB%20(Rule%20Compliant)-brightgreen)](#important-rules-compliance)
@@ -16,13 +18,20 @@
 
 ---
 
-## 📌 2. Chosen Challenge Vertical
+## 📌 2. Chosen Challenge Vertical: Automation: Job Hunt Autopilot
 
+* **Challenge Track:** **Automation: Job Hunt Autopilot**
 * **Challenge Persona:** A recently laid-off job seeker in the AI era who has applied to 100+ roles across job boards and career pages.
 * **The Problem:** 
   1. **Application Chaos:** Applicants rapidly lose track of who responded, who rejected them, what stage each role is in, and when it is time to follow up.
   2. **Predatory Job Scams:** Vulnerable candidates are prime targets for fake job offers demanding "training fees" or "gate pass security deposits", harvesting unencrypted Aadhaar/PAN cards before any interview, or posing as enterprise companies from freemail/typosquatted domains.
-* **The Solution (TaalMail AI):** An intelligent, deterministic and generative pipeline that ingests raw job-seeker emails, isolates fake offers into a quarantined Scam Shield, merges multi-touch communications into an self-updating 4-column Kanban tracker, generates 1-click official 1930 cybercrime complaints, flags stale applications with automated follow-up drafts, and prepares tailored interview briefing notes for upcoming rounds.
+* **The Autopilot Solution (TaalMail AI):** An autonomous end-to-end autopilot engine that:
+  * **Ingests & Classifies:** Automatically parses incoming recruiter emails with Gemini 2.5 Flash and heuristic rules.
+  * **Quarantines Threats:** Automatically intercepts fake job scams before they reach the applicant's pipeline.
+  * **Maintains State Machine:** Deduplicates multi-touch emails into an auto-updating 4-column Kanban tracker (`applied` -> `interview` -> `offer` / `rejected`).
+  * **Follow-Up Autopilot:** Automatically monitors stalled applications and writes ready-to-send follow-up drafts for emails unanswered for ≥ 7 days.
+  * **Interview Briefings:** Automatically prepares company profiles, technical focus points, and reverse-interview questions the moment an interview invite arrives.
+  * **1-Click 1930 Dossier:** Prepares official National Cybercrime Reporting Portal dossiers for quarantined threats.
 
 ---
 
@@ -166,15 +175,34 @@ When a fake offer is quarantined, applicants often do not know how or where to r
 ---
 
 ## 🧪 7. Validation & Automated Tests
-
+ 
 Run the comprehensive test suite locally to verify pipeline integrity:
 
 ```bash
-# 1. Run pipeline audit and Kanban verification
+# 1. Run automated unit tests (PyTest / Unittest - 100% Offline & Deterministic)
+pytest tests/
+# or
+python -m unittest discover tests
+
+# 2. Run pipeline audit and Kanban verification (requires running server)
 python audit.py
 
-# 2. Run live Gemini API integration test (with live key)
+# 3. Run live Gemini API integration test (with live key)
 python test_live_gemini.py
+```
+
+### Automated Unit Test Results (`tests/test_pipeline.py`):
+```text
+Ran 8 tests in 0.009s
+OK
+[PASS] test_rule_hints_scam_detection
+[PASS] test_rule_hints_genuine_email
+[PASS] test_state_progression_and_scam_override
+[PASS] test_follow_up_alarm_logic
+[PASS] test_follow_up_draft_generator
+[PASS] test_interview_prep_copilot
+[PASS] test_cybercrime_dossier_generation
+[PASS] test_end_to_end_pipeline_offline
 ```
 
 ### Test Suite Output Summary (`audit.py`):
