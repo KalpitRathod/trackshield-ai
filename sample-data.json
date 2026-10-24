@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "date": "2026-10-10",
+    "from": "careers@zentech.in",
+    "subject": "Application received: Backend Engineer",
+    "body": "Thanks for applying. We will get back to you regarding your Backend Engineer application within next week."
+  },
+  {
+    "id": 2,
+    "date": "2026-10-14",
+    "from": "hr.infosys.jobs@gmail.com",
+    "subject": "Offer letter - pay Rs 4,999 training fee",
+    "body": "You are selected. Pay the refundable fee and send Aadhaar and PAN to confirm your joining."
+  },
+  {
+    "id": 3,
+    "date": "2026-10-18",
+    "from": "talent@finly.co",
+    "subject": "Interview invite: Round 1 on 27 Oct",
+    "body": "Please pick a slot for a 45-minute call with our team for the Frontend Engineer position."
+  }
+]

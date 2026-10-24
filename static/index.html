@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrackShield AI | Job Hunt Autopilot</title>
+  <meta name="description" content="AI job tracker with scam detection, follow-up reminders, and interview prep.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+    <div class="ambient-blob blob-3"></div>
+  </div>
+
+  <!-- ══ TOP NAV ══ -->
+  <nav class="topnav">
+    <div class="topnav-brand">
+      <div class="brand-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <span class="brand-name">TrackShield <em>AI</em></span>
+      <span class="brand-tag">GDG 2026</span>
+    </div>
+
+    <div class="topnav-tabs" id="navTabs">
+      <button class="nav-tab active" data-tab="overview">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Overview
+      </button>
+      <button class="nav-tab" data-tab="tracker">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Tracker
+        <span class="tab-badge tab-badge-blue" id="tabCountTracker">14</span>
+      </button>
+      <button class="nav-tab" data-tab="scams">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Scam Shield
+        <span class="tab-badge tab-badge-red" id="tabCountScams">5</span>
+      </button>
+      <button class="nav-tab" data-tab="followups">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Follow Ups
+        <span class="tab-badge tab-badge-amber" id="tabCountFollowups">4</span>
+      </button>
+      <button class="nav-tab" data-tab="help">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Help
+      </button>
+    </div>
+
+    <div class="topnav-actions">
+      <div class="sim-date-wrap">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="sim-label">Today:</span>
+        <input type="date" id="inputTodayDate" value="2026-10-24" class="sim-date-input">
+      </div>
+      <button id="btnRunPipeline" class="btn-refresh">
+        <svg id="refreshIcon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+        Refresh
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══ MAIN CONTENT ══ -->
+  <main class="main-content">
+
+    <!-- ─── TAB: OVERVIEW ─── -->
+    <section class="tab-panel active" id="tab-overview">
+
+      <!-- Hero Summary -->
+      <div class="overview-hero">
+        <div class="hero-text">
+          <h2 class="hero-title">Job Hunt Autopilot</h2>
+          <p class="hero-sub">Your AI copilot processed <strong id="heroEmailCount">20 emails</strong> from a recently laid-off job seeker. All classified, merged, and scam-checked automatically.</p>
+          <div class="hero-disclaimer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            Inbox is mocked for demo purposes (Hackathon Rule 05) &nbsp;·&nbsp; Gemini responses cached offline (Rule 06)
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="shield-anim">
+            <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Metric Cards -->
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-icon-wrap ic-blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="metric-body">
+            <span class="metric-num" id="statEmails">20</span>
+            <span class="metric-label">Emails Processed</span>
+          </div>
+        </div>
+        <div class="metric-card mc-red" onclick="switchTab('scams')">
+          <div class="metric-icon-wrap ic-red">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="metric-body">
+            <span class="metric-num red-num" id="statScams">5</span>
+            <span class="metric-label">Scams Blocked</span>
+          </div>
+          <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="metric-card mc-amber" onclick="switchTab('followups')">
+          <div class="metric-icon-wrap ic-amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="metric-body">
+            <span class="metric-num amber-num" id="statFollowups">4</span>
+            <span class="metric-label">Follow Ups Due</span>
+          </div>
+          <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="metric-card mc-green" onclick="switchTab('tracker')">
+          <div class="metric-icon-wrap ic-green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="metric-body">
+            <span class="metric-num green-num" id="statActive">14</span>
+            <span class="metric-label">Active Applications</span>
+          </div>
+          <svg class="card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </div>
+
+      <!-- Pipeline Flow Visual -->
+      <div class="pipeline-section">
+        <h3 class="section-title">How the Pipeline Works</h3>
+        <div class="pipeline-flow">
+          <div class="pipe-step">
+            <div class="pipe-icon-wrap pi-blue">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <span class="pipe-label">inbox.json</span>
+            <span class="pipe-sublabel">20 mocked emails</span>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step">
+            <div class="pipe-icon-wrap pi-purple">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <span class="pipe-label">Rule Hints</span>
+            <span class="pipe-sublabel">Fee, Aadhaar, Gmail, Telegram</span>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step">
+            <div class="pipe-icon-wrap pi-indigo">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <span class="pipe-label">Gemini AI</span>
+            <span class="pipe-sublabel">Structured JSON output</span>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step">
+            <div class="pipe-icon-wrap pi-teal">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+            </div>
+            <span class="pipe-label">Merge + Track</span>
+            <span class="pipe-sublabel">Company+Role dedup</span>
+          </div>
+          <div class="pipe-arrow">→</div>
+          <div class="pipe-step">
+            <div class="pipe-icon-wrap pi-amber">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+            </div>
+            <span class="pipe-label">Dashboard</span>
+            <span class="pipe-sublabel">Tracker + Alerts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick snapshot of columns -->
+      <div class="snapshot-section">
+        <h3 class="section-title">Application Snapshot</h3>
+        <div class="snapshot-grid">
+          <div class="snapshot-col sc-blue">
+            <div class="snap-col-header"><span class="snap-dot sd-blue"></span>Applied</div>
+            <span class="snap-num" id="snapApplied">6</span>
+            <span class="snap-sub">awaiting response</span>
+          </div>
+          <div class="snapshot-col sc-purple">
+            <div class="snap-col-header"><span class="snap-dot sd-purple"></span>Interview</div>
+            <span class="snap-num" id="snapInterview">3</span>
+            <span class="snap-sub">scheduled rounds</span>
+          </div>
+          <div class="snapshot-col sc-green">
+            <div class="snap-col-header"><span class="snap-dot sd-green"></span>Offer</div>
+            <span class="snap-num" id="snapOffer">2</span>
+            <span class="snap-sub">genuine verified</span>
+          </div>
+          <div class="snapshot-col sc-slate">
+            <div class="snap-col-header"><span class="snap-dot sd-slate"></span>Rejected</div>
+            <span class="snap-num" id="snapRejected">3</span>
+            <span class="snap-sub">closed positions</span>
+          </div>
+        </div>
+        <button class="see-full-btn" onclick="switchTab('tracker')">
+          View Full Kanban Board
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ─── TAB: TRACKER ─── -->
+    <section class="tab-panel" id="tab-tracker">
+      <div class="tab-header">
+        <div>
+          <h2 class="tab-title">Application Tracker</h2>
+          <p class="tab-subtitle">Status only moves forward. Two emails from the same company are automatically merged into one card.</p>
+        </div>
+        <button class="btn-secondary" id="btnViewInbox">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          View Raw Inbox
+        </button>
+      </div>
+
+      <div class="kanban-grid">
+        <div class="kanban-col">
+          <div class="kcol-header kh-blue">
+            <div class="kcol-title-row">
+              <span class="kcol-dot kd-blue"></span>
+              <span class="kcol-label">Applied</span>
+            </div>
+            <span class="kcol-count" id="countApplied">0</span>
+          </div>
+          <div class="kcol-body" id="colApplied"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kcol-header kh-purple">
+            <div class="kcol-title-row">
+              <span class="kcol-dot kd-purple"></span>
+              <span class="kcol-label">Interview</span>
+            </div>
+            <span class="kcol-count" id="countInterview">0</span>
+          </div>
+          <div class="kcol-body" id="colInterview"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kcol-header kh-green">
+            <div class="kcol-title-row">
+              <span class="kcol-dot kd-green"></span>
+              <span class="kcol-label">Offer</span>
+            </div>
+            <span class="kcol-count" id="countOffer">0</span>
+          </div>
+          <div class="kcol-body" id="colOffer"></div>
+        </div>
+        <div class="kanban-col">
+          <div class="kcol-header kh-slate">
+            <div class="kcol-title-row">
+              <span class="kcol-dot kd-slate"></span>
+              <span class="kcol-label">Rejected</span>
+            </div>
+            <span class="kcol-count" id="countRejected">0</span>
+          </div>
+          <div class="kcol-body" id="colRejected"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TAB: SCAM SHIELD ─── -->
+    <section class="tab-panel" id="tab-scams">
+      <div class="tab-header">
+        <div>
+          <h2 class="tab-title">Scam Shield</h2>
+          <p class="tab-subtitle">These emails were intercepted before they could deceive you. Scam status overrides every other classification.</p>
+        </div>
+        <span class="scam-count-pill" id="scamPillCount">5 threats blocked</span>
+      </div>
+
+      <!-- Scam Rules Explainer -->
+      <div class="scam-rules-bar">
+        <span class="rules-bar-label">Detection rules active:</span>
+        <span class="rule-chip">Fee demand</span>
+        <span class="rule-chip">Aadhaar and PAN harvest</span>
+        <span class="rule-chip">Freemail impersonation</span>
+        <span class="rule-chip">Lookalike domain</span>
+        <span class="rule-chip">Telegram redirect</span>
+        <span class="rule-chip">Selection without interview</span>
+        <span class="rule-chip">High pressure urgency</span>
+      </div>
+
+      <div class="scam-list" id="scamList"></div>
+    </section>
+
+    <!-- ─── TAB: FOLLOW-UPS ─── -->
+    <section class="tab-panel" id="tab-followups">
+      <div class="tab-header">
+        <div>
+          <h2 class="tab-title">Follow Up Reminders</h2>
+          <p class="tab-subtitle">Applications with no reply for 7 or more days. Click any card to generate a polite follow up email draft.</p>
+        </div>
+        <div class="date-presets-row">
+          <button class="preset-pill active" data-date="2026-10-24">Oct 24 (today)</button>
+          <button class="preset-pill" data-date="2026-10-18">Oct 18</button>
+          <button class="preset-pill" data-date="2026-10-31">Oct 31</button>
+        </div>
+      </div>
+      <div class="followup-list" id="followupList"></div>
+      <div class="no-followups" id="noFollowups" style="display:none">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <p>All caught up! No follow up reminders due on this date.</p>
+      </div>
+    </section>
+
+    <!-- ─── TAB: HELP ─── -->
+    <section class="tab-panel" id="tab-help">
+      <div class="help-hero">
+        <h2 class="help-hero-title">How to Use TrackShield AI</h2>
+        <p class="help-hero-sub">Everything you need to know about the AI-era layoff recovery copilot</p>
+      </div>
+
+      <!-- Steps -->
+      <div class="help-steps">
+        <div class="help-step">
+          <div class="hs-number">1</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Overview: See the big picture</h4>
+            <p class="hs-desc">Start here. The Overview tab shows how many emails were processed, scams blocked, follow up reminders due, and active applications at a glance. Click any metric card to jump directly to that section.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">2</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Tracker: Your Kanban board</h4>
+            <p class="hs-desc">Every genuine email is classified into <strong>Applied, Interview, Offer,</strong> or <strong>Rejected</strong>. If you receive two emails from the same company (for example an acknowledgement and then an interview invite), they are automatically merged into one card and the status is upgraded.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">3</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Scam Shield: Fake offers caught in red</h4>
+            <p class="hs-desc">Any email asking for a <strong>training fee, Aadhaar or PAN before an interview, or arriving from a freemail domain</strong> (like Gmail pretending to be Infosys) is quarantined here. Scam status overrides every other classification: a fake "offer" is never added to your tracker.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">4</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Follow Ups: Never miss a chance</h4>
+            <p class="hs-desc">If an application has been in <em>Applied</em> status for 7 or more days with no reply, a follow up reminder is automatically raised. Click <strong>Draft Email</strong> to get a ready to send polite message. Use the date presets to simulate what reminders look like in the future.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">5</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Interview Prep: Strategic notes</h4>
+            <p class="hs-desc">On any card in the <em>Interview</em> column, click <strong>Prep Notes</strong> to get a tailored preparation brief: company background, core technical topics, likely interview questions with strategic answer tips, and smart questions to ask the interviewer.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">6</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Simulate different dates</h4>
+            <p class="hs-desc">Use the date picker in the top right corner to change what "today" means. This shows you exactly which follow ups would trigger on any given date. Try switching to <strong>Oct 31</strong> to see 6 follow up reminders become due.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <div class="hs-number">7</div>
+          <div class="hs-content">
+            <h4 class="hs-title">Offline first architecture</h4>
+            <p class="hs-desc">All Gemini API responses are pre-cached in <code>gemini_cache.json</code>. If Wi-Fi fails during the demo, the entire pipeline runs from disk and produces identical output. Live API calls auto-save back to the cache when connectivity is restored.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scam Red Flags Reference -->
+      <div class="help-scam-ref">
+        <h3 class="help-section-title">Scam Red Flag Reference</h3>
+        <div class="scam-ref-grid">
+          <div class="scam-ref-card">
+            <div class="src-icon">💸</div>
+            <h5>Upfront Fee</h5>
+            <p>Any demand for a training fee, registration charge, laptop deposit, or gate pass before joining. Real employers never charge candidates.</p>
+          </div>
+          <div class="scam-ref-card">
+            <div class="src-icon">🪪</div>
+            <h5>KYC Harvesting</h5>
+            <p>Requests for Aadhaar card, PAN card, or cancelled cheque sent via email before any formal contract or background verification.</p>
+          </div>
+          <div class="scam-ref-card">
+            <div class="src-icon">📧</div>
+            <h5>Free-Mail Impersonation</h5>
+            <p>Enterprise companies (TCS, Infosys, Wipro) will never recruit via @gmail.com or @yahoo.com. Always check the sender domain.</p>
+          </div>
+          <div class="scam-ref-card">
+            <div class="src-icon">🔗</div>
+            <h5>Lookalike Domain</h5>
+            <p>Typosquatting domains like <code>techmahindra-careers.co</code> or <code>tcs-careers-portal.com</code> mimic real corporate sites.</p>
+          </div>
+          <div class="scam-ref-card">
+            <div class="src-icon">💬</div>
+            <h5>Telegram or WhatsApp</h5>
+            <p>Legitimate interviews are on Google Meet, Zoom, or Teams. Moving to Telegram is a scam signal without exception.</p>
+          </div>
+          <div class="scam-ref-card">
+            <div class="src-icon">⏰</div>
+            <h5>Artificial Urgency</h5>
+            <p>Phrases like "pay before 5 PM or forfeit your offer" are designed to prevent you from verifying the employer's identity.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Classifier Sandbox -->
+      <div class="help-sandbox">
+        <h3 class="help-section-title">Try the Live Email Classifier</h3>
+        <p class="help-sandbox-sub">Paste any suspicious email below and the Gemini pipeline will classify it in real-time using your rule hints and AI model.</p>
+        <div class="sandbox-form">
+          <div class="sandbox-row">
+            <div class="sb-field">
+              <label class="sb-label">Sender Address</label>
+              <input type="text" id="sbFrom" class="sb-input" value="hr.wipro.onboarding@gmail.com">
+            </div>
+            <div class="sb-field">
+              <label class="sb-label">Subject</label>
+              <input type="text" id="sbSubject" class="sb-input" value="Selected! Pay Rs 3,999 training fee to confirm joining">
+            </div>
+          </div>
+          <div class="sb-field">
+            <label class="sb-label">Email Body</label>
+            <textarea id="sbBody" class="sb-textarea" rows="4">You have been selected for the role of Software Engineer at Wipro. Pay Rs 3,999 refundable fee via UPI and send your Aadhaar and PAN card to confirm your batch seat.</textarea>
+          </div>
+          <button id="btnSandboxTest" class="btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Analyze with Gemini
+          </button>
+        </div>
+        <div id="sandboxResult" class="sandbox-result" style="display:none"></div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ══ MODALS ══ -->
+
+  <!-- Follow-up Draft Modal -->
+  <div class="modal-overlay" id="modalFollowup">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-icon-wrap mi-amber">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        </div>
+        <div>
+          <p class="modal-eyebrow">Follow Up Draft</p>
+          <h3 class="modal-title" id="fuModalTitle">Swiggy • Fullstack Developer</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modalFollowup')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="fu-meta-row">
+          <span class="fu-meta-item"><span class="fu-meta-label">Company</span><span id="fuCompany">Swiggy</span></span>
+          <span class="fu-meta-item"><span class="fu-meta-label">Days without reply</span><span class="amber-text" id="fuDays">12 days</span></span>
+        </div>
+        <label class="field-label">Subject</label>
+        <input type="text" id="fuSubject" class="field-input" readonly>
+        <label class="field-label mt">Body</label>
+        <textarea id="fuBody" class="field-textarea" rows="9" readonly></textarea>
+        <div class="modal-footer-row">
+          <button class="btn-primary" id="btnCopyDraft">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+            Copy to Clipboard
+          </button>
+          <span class="copy-toast" id="copyToast">Copied!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interview Prep Modal -->
+  <div class="modal-overlay" id="modalPrep">
+    <div class="modal-card modal-wide">
+      <div class="modal-top">
+        <div class="modal-icon-wrap mi-purple">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div>
+          <p class="modal-eyebrow">Interview Prep Copilot</p>
+          <h3 class="modal-title" id="prepModalTitle">Zentech • Backend Engineer</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modalPrep')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="prepModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Email Inspector Modal -->
+  <div class="modal-overlay" id="modalEmail">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-icon-wrap mi-blue">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div>
+          <p class="modal-eyebrow">Email Inspector</p>
+          <h3 class="modal-title" id="emailModalTitle">Email Details</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modalEmail')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="emailModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Inbox Viewer Modal -->
+  <div class="modal-overlay" id="modalInbox">
+    <div class="modal-card modal-wide">
+      <div class="modal-top">
+        <div class="modal-icon-wrap mi-teal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </div>
+        <div>
+          <p class="modal-eyebrow">Mocked Inbox • Rule 05</p>
+          <h3 class="modal-title">20 Emails from a Laid-Off Job Seeker</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('modalInbox')">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="inbox-note">This inbox is hand-crafted and mocked for demo purposes, spanning 3 weeks of job activity including applied emails, interviews, rejections, genuine offers, and 5 scam archetypes.</p>
+        <div class="inbox-table-wrap">
+          <table class="inbox-table">
+            <thead><tr><th>#</th><th>Date</th><th>From</th><th>Subject</th><th></th></tr></thead>
+            <tbody id="inboxTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

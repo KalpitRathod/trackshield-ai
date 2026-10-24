@@ -1,0 +1,21 @@
+# Environment and Secrets (Security)
+.env
+*.env
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Large Datasets (>10MB rule compliance)
+Real  Fake Job Posting Prediction/
+bolewarahinglish-scam-text-dataset/
+*.csv
+*.zip
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

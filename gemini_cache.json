@@ -1,0 +1,208 @@
+{
+  "1": {
+    "company": "Zentech",
+    "role": "Backend Engineer",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "2": {
+    "company": "Infosys",
+    "role": "Systems Associate",
+    "status": "scam",
+    "scam_reasons": [
+      "Domain spoofing: Free-mail @gmail.com impersonating Infosys",
+      "Demands upfront refundable training fee of Rs 4,999",
+      "Sensitive identity harvesting (Aadhaar & PAN card requested via email)",
+      "Unsolicited offer without interview or examination"
+    ],
+    "confidence": 0.99,
+    "interview_date": null
+  },
+  "3": {
+    "company": "Finly",
+    "role": "Frontend Engineer",
+    "status": "interview",
+    "scam_reasons": [],
+    "confidence": 0.97,
+    "interview_date": "2026-10-27"
+  },
+  "4": {
+    "company": "Swiggy",
+    "role": "Fullstack Developer",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "5": {
+    "company": "Razorpay",
+    "role": "Senior Frontend Engineer",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.99,
+    "interview_date": null
+  },
+  "6": {
+    "company": "Postman",
+    "role": "Developer Relations Engineer",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "7": {
+    "company": "CRED",
+    "role": "iOS Engineer",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "8": {
+    "company": "Flipkart",
+    "role": "SDE 1 (Platform Team)",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "9": {
+    "company": "Zerodha",
+    "role": "Systems & Infrastructure Engineer",
+    "status": "interview",
+    "scam_reasons": [],
+    "confidence": 0.97,
+    "interview_date": "2026-10-28"
+  },
+  "10": {
+    "company": "Zentech",
+    "role": "Backend Engineer",
+    "status": "interview",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": "2026-10-25"
+  },
+  "11": {
+    "company": "Atlassian",
+    "role": "Software Engineer",
+    "status": "rejected",
+    "scam_reasons": [],
+    "confidence": 0.96,
+    "interview_date": null
+  },
+  "12": {
+    "company": "Notion",
+    "role": "Product Designer",
+    "status": "rejected",
+    "scam_reasons": [],
+    "confidence": 0.96,
+    "interview_date": null
+  },
+  "13": {
+    "company": "Uber",
+    "role": "Data Platform Engineer",
+    "status": "rejected",
+    "scam_reasons": [],
+    "confidence": 0.97,
+    "interview_date": null
+  },
+  "14": {
+    "company": "Stripe",
+    "role": "Staff Infrastructure Engineer",
+    "status": "offer",
+    "scam_reasons": [],
+    "confidence": 0.99,
+    "interview_date": null
+  },
+  "15": {
+    "company": "Pine Labs",
+    "role": "Senior Backend Lead",
+    "status": "offer",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "16": {
+    "company": "Tech Mahindra",
+    "role": "Junior Software Trainee",
+    "status": "scam",
+    "scam_reasons": [
+      "Lookalike domain spoofing: techmahindra-careers.co impersonating official techmahindra.com",
+      "Demands upfront refundable security & training fee of Rs 6,500 via UPI",
+      "High-pressure deadline to pay before 5:00 PM today or forfeit offer",
+      "Guaranteed selection without any interview or assessment"
+    ],
+    "confidence": 0.99,
+    "interview_date": null
+  },
+  "17": {
+    "company": "Apex Global Hiring",
+    "role": "Remote Operations Analyst",
+    "status": "scam",
+    "scam_reasons": [
+      "Identity theft / document harvesting: Requests unencrypted Aadhaar, PAN, and cancelled cheque via email reply",
+      "Unrealistic salary (Rs 75,000/mo) for entry-level remote operations with 'no prior interview needed'",
+      "High-risk arbitrary 24-hour urgency deadline"
+    ],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "18": {
+    "company": "CloudScale Analytics",
+    "role": "Remote Cloud Associate",
+    "status": "scam",
+    "scam_reasons": [
+      "Redirects candidate interview to anonymous off-platform Telegram channel (@CloudScale_HR_Interviews)",
+      "Vague hiring claims with urgent text-only screening by executive",
+      "Inflated hourly rate without verified credentials"
+    ],
+    "confidence": 0.96,
+    "interview_date": null
+  },
+  "19": {
+    "company": "Tata Consultancy Services (TCS)",
+    "role": "Associate Software Engineer",
+    "status": "scam",
+    "scam_reasons": [
+      "Typosquatting/Lookalike domain: tcs-careers-portal.com mimicking legitimate tcs.com",
+      "Demands Rs 3,500 advance payment for security badge and campus gate pass",
+      "Immediate joining letter contingent on advance fee transfer"
+    ],
+    "confidence": 0.99,
+    "interview_date": null
+  },
+  "20": {
+    "company": "PhonePe",
+    "role": "Software Engineer (Backend)",
+    "status": "applied",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": null
+  },
+  "777": {
+    "company": "Wipro",
+    "role": "Software Engineer",
+    "status": "scam",
+    "scam_reasons": [
+      "Domain spoofing: Free-mail @gmail.com impersonating Wipro",
+      "Demands upfront refundable training fee of Rs 3,999 via UPI",
+      "Harvests sensitive Aadhaar and PAN documents via WhatsApp",
+      "Moves candidate screening or joining to unofficial chat apps like WhatsApp",
+      "Unsolicited selection without legitimate interview process"
+    ],
+    "confidence": 0.99,
+    "interview_date": null,
+    "_model_used": "gemini-flash-lite-latest"
+  },
+  "778": {
+    "company": "Meesho",
+    "role": "Backend Engineer",
+    "status": "interview",
+    "scam_reasons": [],
+    "confidence": 0.98,
+    "interview_date": "2026-11-03",
+    "_model_used": "gemini-flash-lite-latest"
+  }
+}
